@@ -26,6 +26,7 @@ WINE_PATHS = [
 
     # application paths
     "/Applications/Wine Stable.app/Contents/Resources/wine/bin",
+    "/Applications/Wine Crossover.app/Contents/Resources/wine/bin",
 
     # custom paths
     "/opt/homebrew/bin"

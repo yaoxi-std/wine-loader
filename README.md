@@ -4,7 +4,7 @@ Auto select `wine` and launch windows `.exe` file.
 Rename `wine-loader` to `<name>`. Double click it or type `./<name>`, then it will find the correct architecture of `wine` and launch `<name>.exe`.
 Make sure that file `<name>.exe` exists!
 
-To customize `wine` path, you should add the path [here](https://github.com/yaoxi-std/wine-loader/blob/main/wine-loader#L30-32).
+To customize `wine` path, you should add the path [here](https://github.com/yaoxi-std/wine-loader/blob/main/wine-loader#L31-32).
 
 Example:
 ```sh
