@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+# 
+# wine loader
+# @author yaoxi-std
+# 
+# Rename it as `<name>`,
+# then it will launch `<name>.exe`
+# with the right `wine`.
+# 
+# Do not use `python <name>` to
+# launch it, use `./<name>`.
+# 
+
+import os, sys, platform, pefile
+
+WINE_PATHS = [
+    # local paths
+    ".",
+    "./wine",
+    "./wine/bin",
+    
+    # system paths
+    "/bin",
+    "/usr/bin",
+    "/usr/local/bin",
+
+    # application paths
+    "/Applications/Wine Stable.app/Contents/Resources/wine/bin",
+
+    # custom paths
+    "/opt/homebrew/bin"
+]
+
+def find_executable(exename, paths):
+    for p in paths:
+        if os.path.exists(os.path.abspath(p + "/" + exename)):
+            return os.path.abspath(p + "/" + exename)
+    return None
+
+def find_exe_architecture(exepath):
+    flags = pefile.PE(exepath).dump_dict()['Flags']
+    if "IMAGE_FILE_32BIT_MACHINE" in flags:
+        return 32
+    else:
+        return 64
+
+def find_sys_architecture():
+    arch = platform.architecture()
+    if "32" in arch:
+        return 32
+    else:
+        return 64
+
+def find_wine_by_arch(exearch, sysarch):
+    if sysarch == 32:
+        if exearch == 32:
+            return "wine"
+    elif sysarch == 64:
+        if exearch == 32:
+            return "wine32on64"
+        elif exearch == 64:
+            return "wine64"
+    return None
+
+if __name__ == '__main__':
+    executable = os.path.abspath(sys.argv[0] + ".exe")
+    assert os.path.exists(executable)
+
+    exearch = find_exe_architecture(executable)
+    sysarch = find_sys_architecture()
+
+    winename = find_wine_by_arch(exearch, sysarch)
+    wine = find_executable(winename, WINE_PATHS)
+    assert wine != None
+
+    exeargv = " ".join(sys.argv[1:])
+
+    exit(os.system("%s %s %s" % (wine, executable, exeargv)))
+
