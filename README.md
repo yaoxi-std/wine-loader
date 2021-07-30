@@ -1,6 +1,11 @@
 # wine-loader
 Auto select `wine` and launch windows `.exe` file.
 
+To use this program, you should install `pefile` python package as below.
+```sh
+/usr/bin/pip3 install pefile
+```
+
 Rename `wine-loader` to `<name>`. Double click it or type `./<name>`, then it will find the correct architecture of `wine` and launch `<name>.exe`.
 Make sure that file `<name>.exe` exists!
 
