@@ -65,6 +65,7 @@ def find_wine_by_arch(exearch, sysarch):
 
 if __name__ == '__main__':
     executable = os.path.abspath(sys.argv[0] + ".exe")
+    exefolder = os.path.abspath(executable + "/..")
     assert os.path.exists(executable)
 
     exearch = find_exe_architecture(executable)
@@ -76,5 +77,4 @@ if __name__ == '__main__':
 
     exeargv = " ".join(sys.argv[1:])
 
-    exit(os.system("%s %s %s" % (wine, executable, exeargv)))
-
+    exit(os.system("(cd %s && %s %s %s)" % (exefolder, wine, executable, exeargv)))
