@@ -1,5 +1,5 @@
 # wine-loader
-Auto select `wine` and launch window `.exe` file.
+Auto select `wine` and launch windows `.exe` file.
 
 Rename `wine-loader` to `<name>`. Double click it or type `./<name>`, then it will find the correct architecture of `wine` and launch `<name>.exe`.
 Make sure that file `<name>.exe` exists!
