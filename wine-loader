@@ -25,6 +25,7 @@ WINE_PATHS = [
     "/usr/local/bin",
 
     # application paths
+    "/Applications/Wine.app/Contents/Resources/wine/bin",
     "/Applications/Wine Stable.app/Contents/Resources/wine/bin",
     "/Applications/Wine Crossover.app/Contents/Resources/wine/bin",
 
